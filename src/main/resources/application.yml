@@ -1,0 +1,49 @@
+server:
+  port: ${APP_PORT:8081} #测试端口
+
+spring:
+  application:
+    name: ${APP_NAME:llmbot}
+
+  datasource:
+    url:  jdbc:mysql://localhost:3306/llmbotjdbc
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:chenxi63}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+    hikari:
+      auto-commit: false
+      connection-timeout: 3000
+      validation-timeout: 3000
+      max-lifetime: 1800000
+      maximum-pool-size: 20          # 最大连接数
+      minimum-idle: 1                # 最小空闲连接数
+      keepalive-time: 30000          # 保活检测间隔（30秒）
+      idle-timeout: 600000           # 空闲连接超时（10分钟）
+
+  jpa:
+    open-in-view: false              # 禁用 open-in-view（避免性能问题）
+
+  servlet:
+    async:
+      request-timeout: -1
+    codec:
+      max-in-memory-size: 10MB  #增加响应缓冲区大小
+
+jwt:
+  secret: ${JWT_SECRET:aXQnc0E1ZWNyZXRLZXlBbmRJdHMyNTYtYmkwlfergfrMJjfefr45}
+  expiration: ${JWT_EXPIRATION:86400} #24小时
+  expiration_admin: ${JWT_EXPIRATION_ADMIN:3600} #ADMIN管理员token有效期1小时
+
+roledays:  #会员时长(天数)
+  member_days: 1
+  supermember_days: 2
+
+apiplatform:
+  baiduqianfan:
+    key: ${BDQF_KEY:bce-v3/ALTAK-tjQVKKXpFHRfDh5nA5CjA/ea14dec7ed4e8dbc7877cfc4541d5c70e692f261}
+    timeout: ${BDQF_TMOUT:5000}
+
+  alibailian:
+    key: ${ALBL_KEY:sk-5eb3ad032830472fa452ad9887e5ee40}
+    timeout: ${ALBL_TMOUT:5000}
